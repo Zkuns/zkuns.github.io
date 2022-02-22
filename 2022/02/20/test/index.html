@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>test |  Hexo</title>
+      <title>在AWS上安装Clickhouse和连接Postgresql |  Hexo</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -65,7 +65,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  test
+  在AWS上安装Clickhouse和连接Postgresql
 </h1>
  
 
@@ -74,10 +74,10 @@
      
     <div class="article-meta">
       <a href="/2022/02/20/test/" class="article-date">
-  <time datetime="2022-02-20T08:11:02.000Z" itemprop="datePublished">2022-02-20</time>
+  <time datetime="2022-02-20T14:24:02.000Z" itemprop="datePublished">2022-02-20</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E6%91%84%E5%BD%B1/">摄影</a>
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
   </div>
   
 <div class="word_count">
@@ -85,7 +85,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">0</span>
+            <span class="post-count">1.3k</span>
         </span>
     </span>
 
@@ -94,20 +94,110 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">5 min</span>
         </span>
     </span>
 </div>
  
     </div>
       
+    <div class="tocbot"></div>
+
 
 
 
   
     <div class="article-entry" itemprop="articleBody">
        
-   
+  <h1 id="服务器安装过程"><a href="#服务器安装过程" class="headerlink" title="服务器安装过程"></a>服务器安装过程</h1><h2 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h2><p>在AWS上选择一个服务器实例类型进行启动。我这里选择的是 x86的一台服务器.<br><a target="_blank" rel="noopener" href="http://images.zkun.me//Users/zkun/Desktop/blog-01.png">blog-01</a></p>
+<p><a target="_blank" rel="noopener" href="http://images.zkun.me//Users/zkun/Desktop/blog-04.png">blog-04</a></p>
+<p><a target="_blank" rel="noopener" href="http://images.zkun.me//Users/zkun/Desktop/blog-03.png">blog-03</a></p>
+<p><a target="_blank" rel="noopener" href="http://images.zkun.me//Users/zkun/Desktop/blog-02.png">blog-02</a></p>
+<p><a target="_blank" rel="noopener" href="https://miracleplus.feishu.cn/space/api/box/stream/download/asynccode/?code=MTdjYTE2MDI3ZDExODFkNDkwNTkwMjg4YzJkMTgyMTBfOVVBZ1FNTmNwNjZPc3pnNkVTZEU5R2lDZUNGelR0d1VfVG9rZW46Ym94Y24wY0o5a1pocEk5MGpRMWV0enNDZFJlXzE2NDUzNjYzMTY6MTY0NTM2OTkxNl9WNA">https://miracleplus.feishu.cn/space/api/box/stream/download/asynccode/?code=MTdjYTE2MDI3ZDExODFkNDkwNTkwMjg4YzJkMTgyMTBfOVVBZ1FNTmNwNjZPc3pnNkVTZEU5R2lDZUNGelR0d1VfVG9rZW46Ym94Y24wY0o5a1pocEk5MGpRMWV0enNDZFJlXzE2NDUzNjYzMTY6MTY0NTM2OTkxNl9WNA</a></p>
+<h2 id="服务器安装过程："><a href="#服务器安装过程：" class="headerlink" title="服务器安装过程："></a>服务器安装过程：</h2><p>官方提供的安装方法</p>
+<p><a target="_blank" rel="noopener" href="https://clickhouse.com/#quick-start">https://clickhouse.com/#quick-start</a></p>
+<p>直接选择 x86的安装方式，即可顺利安装。记得安装完成后，删掉本地临时文件。</p>
+<p><a target="_blank" rel="noopener" href="https://miracleplus.feishu.cn/space/api/box/stream/download/asynccode/?code=NDUxYmY2YjAwNTA4ZDg4NThiNjExMjI2ZDA2MTdkYWRfOVYyN1VBc2FqZ2IwZFZGbjlXUGhaZnRMSFYyMTBUU1BfVG9rZW46Ym94Y25CcTNKUmk3dVNaamdkS2xBUnNLa0M1XzE2NDUzNjYzMTY6MTY0NTM2OTkxNl9WNA">https://miracleplus.feishu.cn/space/api/box/stream/download/asynccode/?code=NDUxYmY2YjAwNTA4ZDg4NThiNjExMjI2ZDA2MTdkYWRfOVYyN1VBc2FqZ2IwZFZGbjlXUGhaZnRMSFYyMTBUU1BfVG9rZW46Ym94Y25CcTNKUmk3dVNaamdkS2xBUnNLa0M1XzE2NDUzNjYzMTY6MTY0NTM2OTkxNl9WNA</a></p>
+<h2 id="服务器启动"><a href="#服务器启动" class="headerlink" title="服务器启动"></a>服务器启动</h2><ol>
+<li><p>直接启动：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo clickhouse start</span><br></pre></td></tr></table></figure>
+
+<p> 启动的时候将会默认创建clickhouse的文件。所以第一次运行最好在创建好的clickhouse目录下进行运行。</p>
+</li>
+<li><p>通过service来启动，在production环境下可以使用该中方式：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service clickhouse-server start</span><br></pre></td></tr></table></figure>
+
+<p> 虽然Clickhouse在安装的时候就已经设置好了 clickhouse的service 文件。但是其中的某些配置可能并不是我们所要的。比如说用户它默认填写的就是clickhouse。而我们当前的用户大概率就不是clickhouse。所以就需要进行修改。</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/systemd/system/clickhouse-server.service</span><br></pre></td></tr></table></figure>
+
+<p> 修改之后，再通过命令进行运行。</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service clickhouse-server start</span><br></pre></td></tr></table></figure>
+
+<p> 如果我们修改过用户，那在启动过程中，还会需要权限问题。因为某些文件默认创建的就是clickhouse用户的文件。所以我们通过命令启动的过程中，需要通过该命令查看对应的service为什么没有启动成功。</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">journalctl -u service-name.service</span><br></pre></td></tr></table></figure>
+
+<p> 然后根据日志来修改对应文件的权限问题。</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R <span class="symbol">root:</span>root /etc/clickhouse-server</span><br></pre></td></tr></table></figure>
+
+<p> 服务器启动后可以查看对应的日志：</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f /var/log/clickhouse-server/clickhouse-server.log</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="服务器的配置"><a href="#服务器的配置" class="headerlink" title="服务器的配置"></a>服务器的配置</h2><p>服务器的启动默认会加载这个文件</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/clickhouse-server/config.xml</span><br></pre></td></tr></table></figure>
+
+<p>用户的配置在这里</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/clickhouse-server/users.xml</span><br></pre></td></tr></table></figure>
+
+<p>我们需要对用户的配置做一下修改，</p>
+<ol>
+<li><p>因为我们需要链接postgresql数据库，所以就需要打开允许使用postgresql engine的一个参数</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">allow_experimental_database_materialized_postgresql</span><br></pre></td></tr></table></figure>
+
+<p> <a target="_blank" rel="noopener" href="https://miracleplus.feishu.cn/space/api/box/stream/download/asynccode/?code=NGYzYjFjYmIyNWUzYzkxODZjYTdjOGRiNGY1NzI5NGJfdWhaY0pkR2FONzZ6SVdOWmNUNmZKaFhaNGFMa1VPcWlfVG9rZW46Ym94Y25wQXNFRlQ0UERwc3M5Z0NMQW5PeEdmXzE2NDUzNjYzMTY6MTY0NTM2OTkxNl9WNA">https://miracleplus.feishu.cn/space/api/box/stream/download/asynccode/?code=NGYzYjFjYmIyNWUzYzkxODZjYTdjOGRiNGY1NzI5NGJfdWhaY0pkR2FONzZ6SVdOWmNUNmZKaFhaNGFMa1VPcWlfVG9rZW46Ym94Y25wQXNFRlQ0UERwc3M5Z0NMQW5PeEdmXzE2NDUzNjYzMTY6MTY0NTM2OTkxNl9WNA</a></p>
+</li>
+<li><p>clickhouse的客户端连接，在不指定用户的情况下，我们使用的是default用户。default用户在默认的情况下拥有所有的权限，而我们也不想给客户端这么大的权限，所以我们可以默认创建一个只读的用户。放在default 账号的下面即可。</p>
+<p> <a target="_blank" rel="noopener" href="https://miracleplus.feishu.cn/space/api/box/stream/download/asynccode/?code=ZWQyOGUzZDdhZmFiYTNkNzkyNjNlM2UxMWJmZmY5MjVfOVVXbGtlazladzRMYXpzcTRqeWZDNUltZ2hpUGpFRzZfVG9rZW46Ym94Y241YUZyeHVoUnVRbDd3QkpNQ251ZmpmXzE2NDUzNjYzMTY6MTY0NTM2OTkxNl9WNA">https://miracleplus.feishu.cn/space/api/box/stream/download/asynccode/?code=ZWQyOGUzZDdhZmFiYTNkNzkyNjNlM2UxMWJmZmY5MjVfOVVXbGtlazladzRMYXpzcTRqeWZDNUltZ2hpUGpFRzZfVG9rZW46Ym94Y241YUZyeHVoUnVRbDd3QkpNQ251ZmpmXzE2NDUzNjYzMTY6MTY0NTM2OTkxNl9WNA</a></p>
+<p> 配置好后重新启动服务</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service clickhouse-server restart</span><br></pre></td></tr></table></figure>
+
+<p> 然后就可以客户端进行正常连接了。使用刚刚创建好的用户进行连接</p>
+ <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clickhouse-client --user click_read --host ec2-<span class="number">71</span>-<span class="number">131</span>-<span class="number">204</span>-<span class="number">150</span>.cn-north-<span class="number">1</span>.compute.amazonaws.com.cn --password</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="对PG数据库进行连接"><a href="#对PG数据库进行连接" class="headerlink" title="对PG数据库进行连接"></a>对PG数据库进行连接</h1><h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><p>在Aws选择postgresql数据库。这里请选择 Postgresql版本大于等于12的版本。我尝试连接过12以下的版本，能在初次连接的时候获取到数据，但是之后的数据就无法同步，很奇怪。</p>
+<h2 id="对数据库进行配置"><a href="#对数据库进行配置" class="headerlink" title="对数据库进行配置"></a>对数据库进行配置</h2><ol>
+<li>在postgresql配置文件中将wal_level设置为logical，但是在aws的Postgresql的数据库中，是没有这个配置的，查阅文档后发现将 rds.logical_replication 设置为1即可。</li>
+<li>max_replication_slots的数量至少大于等于2。aws的Pg默认就是10。所以无需修改。</li>
+</ol>
+<h2 id="进行数据库连接"><a href="#进行数据库连接" class="headerlink" title="进行数据库连接"></a>进行数据库连接</h2><p>使用客户端连接上你的Clickhouse的服务器。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clickhouse-client --host clickhouse_host_url --password</span><br></pre></td></tr></table></figure>
+
+<p>因为我这里没有指定用户，所以它通过默认的default用户来进行连接。这样我也有最高权限来进行Clickhouse这边的数据库的创建。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE mp_stage ENGINE = MaterializedPostgreSQL(<span class="string">&#x27;yourdatabaseurl:5432&#x27;</span>, <span class="string">&#x27;database_name&#x27;</span>, <span class="string">&#x27;username&#x27;</span>, <span class="string">&#x27;password&#x27;</span>) SETTINGS materialized_postgresql_max_block_size = <span class="number">65536</span>,</span><br><span class="line">materialized_postgresql_allow_automatic_update=<span class="number">1</span>,</span><br><span class="line">materialized_postgresql_tables_list = <span class="string">&#x27;users, videos&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到连接的时候有指定参数，这里创建数据库更多的配置信息在这里：<a target="_blank" rel="noopener" href="https://clickhouse.com/docs/en/engines/database-engines/materialized-postgresql/">https://clickhouse.com/docs/en/engines/database-engines/materialized-postgresql/</a></p>
+<p>这里如果不指定表的名字，默认是获取数据库里所有的表并进行同步。建议还是指定一下表名字。如果之后需要添加表，可以直接通过命令添加表</p>
+<p><strong>一些常用的命令</strong></p>
+<p>删除错误数据库</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">drop database database_name;</span><br></pre></td></tr></table></figure>
+
+<p>添加需要连接的表</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ATTACH TABLE postgres_database.new_table;</span><br></pre></td></tr></table></figure>
+
+<p>删除已经连接的表</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DETACH TABLE postgres_database.table_to_remove;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项</strong></p>
+<ol>
+<li>clickhouse连接上我们的数据库之后，只能对Postgresql数据库做查询操作，它是没有修改的操作的，相当与它只连接了只读数据库。</li>
+<li>如果被连接的PG数据库一直没有数据更新，会导致一直没有同步操作，而wal日志时候在进行同步之后才会进行清理，从而导致 wal replication一直在增大。最后填满所有的空间导致数据库无法访问，所以需要对不常更新的数据库添加监控，如果遇到这种情况。可以手动进行数据的修改，然后它自动就会进行同步和清理。</li>
+</ol>
+<p>另一个极端的方式就是查询出对应的 wal replication slot，然后对过大的wal replication slot进行清理，不过这样会打断同步。</p>
+<p>查询 wal replication slot</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select slot_name, pg_size_pretty(pg_wal_lsn_diff(pg_current_wal_lsn(),restart_lsn)) as replicationSlotLag, active from pg_replication_slots</span><br></pre></td></tr></table></figure>
+
+<p>删除</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select pg_drop_replication_slot(<span class="string">&#x27;slot_name&#x27;</span>);</span><br></pre></td></tr></table></figure>
+ 
       <!-- reward -->
       
     </div>
@@ -176,7 +266,7 @@
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tag1/" rel="tag">tag1</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tag2/" rel="tag">tag2</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ClickHouse/" rel="tag">ClickHouse</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Postgresql/" rel="tag">Postgresql</a></li></ul>
 
     </footer>
   </div>
