@@ -99,15 +99,11 @@
       
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="服务器安装过程"><a href="#服务器安装过程" class="headerlink" title="服务器安装过程"></a>服务器安装过程</h1><p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzrdx30osfj22720f00xy.jpg" alt="blog-01"></p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzrdx4b8x4j20zk0cdabg.jpg" alt="blog-04"></p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzrdx3uf4oj20zk0bt76k.jpg" alt="blog-03"></p>
-<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzrdx4ugutj21es0u0jx7.jpg" alt="blog-02"></p>
-<h2 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h2><p>在AWS上选择一个服务器实例类型进行启动。我这里选择的是 x86的一台服务器.<br><img src="http://images.zkun.me/blog-01.png" alt="blog-01"></p>
+  <h1 id="服务器安装过程"><a href="#服务器安装过程" class="headerlink" title="服务器安装过程"></a>服务器安装过程</h1><h2 id="准备："><a href="#准备：" class="headerlink" title="准备："></a>准备：</h2><p>在AWS上选择一个服务器实例类型进行启动。我这里选择的是 x86的一台服务器.<br><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzrdx30osfj22720f00xy.jpg" alt="blog-01"></p>
 <h2 id="服务器安装过程："><a href="#服务器安装过程：" class="headerlink" title="服务器安装过程："></a>服务器安装过程：</h2><p>官方提供的安装方法</p>
 <p><a target="_blank" rel="noopener" href="https://clickhouse.com/#quick-start">https://clickhouse.com/#quick-start</a></p>
 <p>直接选择 x86的安装方式，即可顺利安装。记得安装完成后，删掉本地临时文件。</p>
-<p><img src="http://images.zkun.me/blog-02.png" alt="blog-02"></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzrdx4ugutj21es0u0jx7.jpg" alt="blog-02"></p>
 <h2 id="服务器启动"><a href="#服务器启动" class="headerlink" title="服务器启动"></a>服务器启动</h2><ol>
 <li><p>直接启动：</p>
  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo clickhouse start</span><br></pre></td></tr></table></figure>
@@ -143,10 +139,10 @@
 <li><p>因为我们需要链接postgresql数据库，所以就需要打开允许使用postgresql engine的一个参数</p>
  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">allow_experimental_database_materialized_postgresql</span><br></pre></td></tr></table></figure>
 
-<p> <img src="http://images.zkun.me/blog-03.png" alt="blog-03"></p>
+<p> <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzrdx3uf4oj20zk0bt76k.jpg" alt="blog-03"></p>
 </li>
 <li><p>clickhouse的客户端连接，在不指定用户的情况下，我们使用的是default用户。default用户在默认的情况下拥有所有的权限，而我们也不想给客户端这么大的权限，所以我们可以默认创建一个只读的用户。放在default 账号的下面即可。</p>
-<p> <img src="http://images.zkun.me/blog-04.png" alt="blog-04"></p>
+<p> <img src="https://tva1.sinaimg.cn/large/e6c9d24egy1gzrdx4b8x4j20zk0cdabg.jpg" alt="blog-04"></p>
 <p> 配置好后重新启动服务</p>
  <figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service clickhouse-server restart</span><br></pre></td></tr></table></figure>
 
